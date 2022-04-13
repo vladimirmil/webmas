@@ -1,1 +1,0 @@
-{"count": 2, "_id": "2021-08-18 23:08:42", "soil humidity": "78.28", "air humidity": "75.37", "temperature": "27.15", "illuminance": "833.78"}

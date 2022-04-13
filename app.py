@@ -1,15 +1,49 @@
-from flask import Flask, render_template, url_for, escape, request, jsonify, request
-from random import sample
-from flask_pymongo import PyMongo
-from pymongo import MongoClient
+from flask import Flask, render_template,request, jsonify
+import sqlite3
+import os
 
 app = Flask(__name__)
-client = MongoClient()
 num = 20
 information = 'string'
+table = "garden"
 
-db = client['baza']
-collection = db.kolekcija
+
+def getSqlData(t, what):
+    conn = sqlite3.connect(os.path.realpath("garden.db"))
+    c = conn.cursor()
+    try:
+        sql = "SELECT * FROM " + t + " WHERE " + what + ";"
+        c.execute(sql)
+        result = str(c.fetchone())
+        result = result.replace("(", "")
+        result = result.replace("\'", "")
+        result = result.replace(")", "")
+        arr = result.split(",")
+        print("Select data: SUCCESS")
+        conn.commit()
+        conn.close()
+        return arr
+    except:
+        conn.close()
+        print("Select data: FAIL")
+
+def get_count(t):
+    conn = sqlite3.connect(os.path.realpath("garden.db"))
+    c = conn.cursor()
+    try:
+        sql = "SELECT COUNT(*) FROM "+ t + ";"
+        c.execute(sql)
+        result = str(c.fetchone())
+        result = result.replace("(", "")
+        result = result.replace(",", "")
+        result = result.replace(")", "")
+        conn.commit()
+        conn.close()
+        print("Get data: SUCCESS")
+        return int(result)
+    except:
+        conn.close()
+        print("Get data: FAIL")
 
 
 @app.route("/")
@@ -21,7 +55,8 @@ def index():
 def getdata():
     l = []
     for x in range(num):   
-        l.append(collection.find_one({"count":collection.count_documents({})-int(x)}))
+        i = "count=" + str(get_count(table) - x)
+        l.append(getSqlData(table, i))
     return jsonify(l)
 
 
@@ -38,7 +73,8 @@ def getdata2():
     info = str(information)
     info = info.replace("'", "")
     info = info.replace("b", "")
-    l = collection.find_one({"_id":info})
+    i = "count=" + str(get_count(info))
+    l = getSqlData(table, i)
     return jsonify(l)
 
 

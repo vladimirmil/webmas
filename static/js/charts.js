@@ -19,6 +19,7 @@
             borderWidth: 1,
             pointBorderColor: 'rgba(255, 203, 5, 1)',
             pointBackgroundColor: 'rgba(255, 203, 5, 0.25)',
+            fill: true,
             pointRadius: 4
         }]
     }
@@ -34,7 +35,9 @@
             borderWidth: 1,
             pointBorderColor: 'rgba(255, 203, 5, 1)',
             pointBackgroundColor: 'rgba(255, 203, 5, 0.25)',
+            fill: true,
             pointRadius: 4
+
         }]
     }
 
@@ -49,6 +52,7 @@
             borderWidth: 1,
             pointBorderColor: 'rgba(255, 203, 5, 1)',
             pointBackgroundColor: 'rgba(255, 203, 5, 0.25)',
+            fill: true,
             pointRadius: 4
         }]
     }
@@ -64,6 +68,7 @@
             borderWidth: 1,
             pointBorderColor: 'rgba(255, 203, 5, 1)',
             pointBackgroundColor: 'rgba(255, 203, 5, 0.25)',
+            fill: true,
             pointRadius: 4
         }]
     }
@@ -97,7 +102,7 @@
             yAxes: [{
                 display: true,
                 gridLines: {color: 'rgba(rgba(255, 203, 5, 0.15)'},
-                ticks: {beginAtZero: true, min: 0, max: 100, stepSize: 5}
+                ticks: {beginAtZero: true, min: 0, max: 50, stepSize: 5}
             }],
             xAxes:[{
                 display: true,
@@ -135,7 +140,7 @@
             yAxes: [{
                 display: true,
                 gridLines: {color: 'rgba(rgba(255, 203, 5, 0.15)'},
-                ticks: {beginAtZero: true, min: 800, max: 1000, stepSize: 5}
+                ticks: {beginAtZero: true, min: 0, max: 480, stepSize: 5}
             }],
             xAxes:[{
                 display: true,
@@ -157,23 +162,32 @@
             i = 19
             for(var a = 0; a < 20; a++){
                 
-                date_time[i] = results[a]._id;
-
-                soil_humidity[i] = results[a].soilhumidity;
+                //date_time[i] = results[a]._id;
+				date_time[i] = results[a][1];
+				//console.log(results[a][0]);
+                //soil_humidity[i] = results[a].soilhumidity;
+                //line_chart_soil_humid.data.datasets[0].data[a] = soil_humidity[a];
+                //line_chart_soil_humid.data.labels[i] = date_time[i];
+				
+				soil_humidity[i] = results[a][2];
                 line_chart_soil_humid.data.datasets[0].data[a] = soil_humidity[a];
                 line_chart_soil_humid.data.labels[i] = date_time[i];
 
-                air_tempeature[i] = results[a].temperature;
+                //air_tempeature[i] = results[a].temperature;
+				air_tempeature[i] = results[a][4];
                 line_chart_air_temp.data.datasets[0].data[a] = air_tempeature[a];
                 line_chart_air_temp.data.labels[i] = date_time[i];
 
-                air_humidity[i] = results[a].airhumidity;
+                //air_humidity[i] = results[a].airhumidity;
+				air_humidity[i] = results[a][3];
                 line_chart_air_humid.data.datasets[0].data[a] = air_humidity[a];
                 line_chart_air_humid.data.labels[i] = date_time[i];
 
-                light_intensity[i] = results[a].illuminance;
+                //light_intensity[i] = results[a].illuminance;
+				light_intensity[i] = results[a][5];
                 line_chart_light.data.datasets[0].data[a] = light_intensity[a];
                 line_chart_light.data.labels[i] = date_time[i];
+				//console.log(light_intensity[i])
 
                 i--;
             }
@@ -187,5 +201,5 @@
     
     window.setInterval(function(){
         adddata();
-    }, 100);
+    }, 200);
     

@@ -1,3 +1,0 @@
-Developer Command Prompt for VS 2017
-cd C:\Users\Vladimir\Documents\srv
-cl /EHsc randomweather.cpp
