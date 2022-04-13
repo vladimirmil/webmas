@@ -1,0 +1,139 @@
+body
+{
+    margin-top: 10px;
+    font-family: "Inter", sans-serif;
+    color: rgb(255, 203, 5);
+	  background-color:rgb(35, 31, 32);
+}
+
+p {
+  color: #fff;
+  margin: 2px;
+  text-align: left;
+}
+
+input[type="textbox"], textarea {
+  border:none;
+  background-color:rgb(255, 203, 5);
+  color: rgb(35, 31, 32);
+  font-size: 15px;
+  width: 120px;
+  
+}
+
+.p_separator {
+  margin:10px;
+}
+
+.search_grid_container {
+  display: grid;
+  width: 20vw;
+  grid-template-columns: 1fr 1fr;
+  padding: 0px;
+  grid-gap: 5px;
+}
+.search_grid_item {
+  margin:0px;
+  padding: 0px;
+  font-size: 14px;
+}
+
+.submitbutton {
+  height: 25px;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0px;
+  outline: none;
+  color: rgb(35, 31, 32);
+  font-size: 14px;
+  background-color:rgb(255, 203, 5);
+
+}
+
+.container {
+  /*padding-left: 10px;*/
+  padding-left: 0.4vw;
+  display: grid;
+  width: 48vw;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 0.1fr;
+  grid-template-areas:
+    "content1 content2"
+    "content3 content4"
+    "search_content search_content";
+  grid-gap: 1rem;
+}
+
+.search_input_fields {
+  border:none;
+  color: rgb(35, 31, 32);
+  font-size: 15px;
+  background-color:rgb(255, 203, 5);
+}
+
+.search_part {
+  /*margin:5px;*/
+  margin-top: 0px;
+  border-radius: 8px;
+  border-color: rgb(255, 203, 5);
+  border-style: solid;
+  border-width: 2px;
+  padding-top: 7px;
+  padding-left: 30px;
+  grid-area: search_content;
+}
+
+.graph {
+  border-radius: 8px;
+  border-color: rgb(255, 203, 5);
+  border-style: solid;
+  border-width: 2px;
+}
+
+#soilhumiditychart {
+  grid-area: content1;
+}
+
+#airtempchart {
+  grid-area: content2;
+}
+
+#airhumiditychart {
+  grid-area: content3;
+}
+
+#lightchart {
+  grid-area: content4;
+}
+
+/*
+.outputclass {
+  position: relative;
+  left: 50px;
+  border:none;
+  color: rgb(35, 31, 32);
+  font-size: 15px;
+  background-color:rgb(255, 203, 5)
+}
+*/
+@media only screen and (max-width: 1100px) {
+  .container {
+    padding-left: 3.5vw;
+    width: 90vw;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 0.15fr;
+    grid-template-areas:
+      "content1"
+      "content3"
+      "content2"
+      "content4"
+      "search_content";
+  }
+
+  .search_part {
+    margin:10px;
+    padding-top: 7px;
+    padding-left: 30px;
+    grid-area: search_content;
+  }
+}
