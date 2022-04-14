@@ -13,12 +13,13 @@ function formatDate(input) {
 
 function getData() {
     var id = formatDate(dateControl.value)
+    id = id.split("-").reverse().join("-");
     id += ' ' + timeControl.value
-    console.log(id);
+    id = id.replace('-', '/')
+    id = id.replace('-', '/')
     sender = id;
     xhr.open('POST', URL);
     xhr.send(sender);
-    //setTimeout(printData(), 1000);
 }
 
 function printData() {
@@ -26,16 +27,16 @@ function printData() {
         getData.done(function(results){
 
         if(results != null) {
-            document.getElementsByName('soil_hum')[0].value = String(results.soilhumidity);
-            document.getElementsByName('air_hum')[0].value = String(results.airhumidity);
-            document.getElementsByName('temp')[0].value = String(results.temperature);
-            document.getElementsByName('illumi')[0].value = String(results.illuminance);
+            document.getElementsByName('soil_hum')[0].value = String(results[2]);
+            document.getElementsByName('air_hum')[0].value = String(results[3]);
+            document.getElementsByName('temp')[0].value = String(results[4]);
+            document.getElementsByName('illumi')[0].value = String(results[5]);
         }
         else{
-            document.getElementsByName('soil_hum')[0].value = "no data" ;
-            document.getElementsByName('air_hum')[0].value = "no data" ;
-            document.getElementsByName('temp')[0].value = "no data" ;
-            document.getElementsByName('illumi')[0].value = "no data" ;
+            document.getElementsByName('soil_hum')[0].value = "nema podataka" ;
+            document.getElementsByName('air_hum')[0].value = "nema podataka" ;
+            document.getElementsByName('temp')[0].value = "nema podataka" ;
+            document.getElementsByName('illumi')[0].value = "nema podataka" ;
         }
     });
 }

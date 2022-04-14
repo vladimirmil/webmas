@@ -64,7 +64,6 @@ def getdata():
 def thisRoute():
     global information
     information = request.data
-    print(information)
     return information
 
 
@@ -73,7 +72,7 @@ def getdata2():
     info = str(information)
     info = info.replace("'", "")
     info = info.replace("b", "")
-    i = "count=" + str(get_count(info))
+    i = "_id=\"" + info + "\""
     l = getSqlData(table, i)
     return jsonify(l)
 
