@@ -1,139 +1,245 @@
-body
-{
-    margin-top: 10px;
-    font-family: "Inter", sans-serif;
-    color: rgb(255, 203, 5);
-	  background-color:rgb(35, 31, 32);
+html{
+    background: #212121;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
-p {
-  color: #fff;
-  margin: 2px;
-  text-align: left;
+body{
+    display: grid;
+    grid-template-rows: auto;
+    justify-items: center;
+    align-items: center;
+}
+/******************************/
+
+.container{
+    background: #242424;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, 
+                rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    display: grid;
+    height: 100%;
+    width: 75vw;
+    border-radius: 20px;
+    margin-top: 6%;
+    margin-bottom: 0%;
+    grid-template-columns: 0.3fr 0.7fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+        "moisture temperature"
+        "humidity light"; 
+}
+/******************************/
+#first{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: moisture;
+    
 }
 
-input[type="textbox"], textarea {
-  border:none;
-  background-color:rgb(255, 203, 5);
-  color: rgb(35, 31, 32);
-  font-size: 15px;
-  width: 120px;
-  
+#second{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: temperature;
+    margin-left: 5%;
 }
 
-.p_separator {
-  margin:10px;
+#third{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: humidity;
+    
 }
 
-.search_grid_container {
-  display: grid;
-  width: 20vw;
-  grid-template-columns: 1fr 1fr;
-  padding: 0px;
-  grid-gap: 5px;
-}
-.search_grid_item {
-  margin:0px;
-  padding: 0px;
-  font-size: 14px;
+
+#fourth{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: light;
+    margin-left: 5%;
 }
 
-.submitbutton {
-  height: 25px;
-  border: 0;
-  box-shadow: none;
-  border-radius: 0px;
-  outline: none;
-  color: rgb(35, 31, 32);
-  font-size: 14px;
-  background-color:rgb(255, 203, 5);
 
+
+/******************************/
+
+#chart1{
+    width: 60%;
+    margin-left: 20%;
+}
+#chart1Text{
+    position: absolute;
+    left: 54%;
+    top: 48%;
+    color: #EFB700;
 }
 
-.container {
-  /*padding-left: 10px;*/
-  padding-left: 0.4vw;
-  display: grid;
-  width: 48vw;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 0.1fr;
-  grid-template-areas:
-    "content1 content2"
-    "content3 content4"
-    "search_content search_content";
-  grid-gap: 1rem;
+#chart2{
+    width: 70%;
 }
 
-.search_input_fields {
-  border:none;
-  color: rgb(35, 31, 32);
-  font-size: 15px;
-  background-color:rgb(255, 203, 5);
+#chart3{
+    width: 60%;
+    margin-left: 20%;
+}
+#chart2Text{
+    position: absolute;
+    left: 54%;
+    top: 48%;
+    color: #EFB700;
 }
 
-.search_part {
-  /*margin:5px;*/
-  margin-top: 0px;
-  border-radius: 8px;
-  border-color: rgb(255, 203, 5);
-  border-style: solid;
-  border-width: 2px;
-  padding-top: 7px;
-  padding-left: 30px;
-  grid-area: search_content;
+#chart4{ 
+    width: 70%;
 }
 
-.graph {
-  border-radius: 8px;
-  border-color: rgb(255, 203, 5);
-  border-style: solid;
-  border-width: 2px;
+/******************************/
+@media only screen and (max-width: 1700px) {
+    .container {
+        margin-top: 7%;
+        font-size: medium;
+    }
 }
 
-#soilhumiditychart {
-  grid-area: content1;
+@media only screen and (max-width: 1650px) {
+    .container {
+        margin-top: 8%;
+        font-size: medium;
+    }
 }
 
-#airtempchart {
-  grid-area: content2;
+@media only screen and (max-width: 1600px) {
+    .container {
+        margin-top: 10%;
+        font-size: medium;
+    }
 }
 
-#airhumiditychart {
-  grid-area: content3;
+@media only screen and (max-width: 1500px) {
+    .container {
+        margin-top: 11%;
+        font-size: medium;
+    }
 }
 
-#lightchart {
-  grid-area: content4;
+@media only screen and (max-width: 1400px) {
+    .container {
+        margin-top: 13%;
+        font-size: small;
+    }
 }
 
-/*
-.outputclass {
-  position: relative;
-  left: 50px;
-  border:none;
-  color: rgb(35, 31, 32);
-  font-size: 15px;
-  background-color:rgb(255, 203, 5)
+@media only screen and (max-width: 1200px) {
+    .container {
+        margin-top: 15%;
+    }
+    #chart1Text{
+        position: absolute;
+        font-size: small;
+        left: 52%;
+        top: 48%;
+        color: #EFB700;
+    }
+
+    #chart2Text{
+        position: absolute;
+        font-size: small;
+        left: 52%;
+        top: 48%;
+        color: #EFB700;
+    }
 }
-*/
+
+@media only screen and (max-width: 1150px) {
+    .container {
+        margin-top: 16%;
+    }
+    #chart1Text{
+        position: absolute;
+        font-size: small;
+        left: 53%;
+        top: 48%;
+        color: #EFB700;
+    }
+
+    #chart2Text{
+        position: absolute;
+        font-size: small;
+        left: 53%;
+        top: 48%;
+        color: #EFB700;
+    }
+}
+
 @media only screen and (max-width: 1100px) {
-  .container {
-    padding-left: 3.5vw;
-    width: 90vw;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 0.15fr;
-    grid-template-areas:
-      "content1"
-      "content3"
-      "content2"
-      "content4"
-      "search_content";
+    .container {
+        height: 100%;
+        width: 90vw;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas: 
+            "moisture humidity"
+            "temperature temperature"
+            "light light";
+        margin-top: 25px;
+        margin-bottom: 40px;
+    }
+
+    #first{
+        margin-left: 0%;
+    }
+
+    #second{
+        margin-left: 0%;
+    }
+
+    #third{
+        margin-left: 0%;
+    }
+
+    #fourth{
+        margin-left: 0%;
+    }
+
+    #chart1{
+        width: 70%;
+        margin-left: 0%;
+    }
+
+    #chart2{ 
+        width: 90%;
+    }
+
+    #chart3{
+        width: 70%;
+        margin-left: 0%;
+    }
+
+    #chart4{ 
+        width: 90%;
+    }
+
+    #chart1Text{
+        position: absolute;
+        font-size: medium;
+        left: 44%;
+        top: 46%;
+        color: #EFB700;
+    }
+
+    #chart2Text{
+        position: absolute;
+        font-size: medium;
+        left: 44%;
+        top: 46%;
+        color: #EFB700;
+    }
+
   }
 
-  .search_part {
-    margin:10px;
-    padding-top: 7px;
-    padding-left: 30px;
-    grid-area: search_content;
-  }
-}
+

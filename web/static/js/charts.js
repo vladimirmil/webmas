@@ -1,195 +1,224 @@
-    var i = 0;
-    var air_tempeature = [];
-    var air_humidity = [];
-    var light_intensity = [];
-    var soil_humidity = [];
-    var date_time = [];
-    num = 5;
+Chart.defaults.color = "#EFB700";
+Chart.defaults.borderColor = "#513E01";
 
-    Chart.defaults.global.defaultFontColor = "#fff";
 
-    var canvas_soil_humid = document.getElementById('soilhumiditychart');
-    var data_soil_humid = {
-        labels: [date_time],
-        datasets: [{
-            label: "Vlažnost zemljišta [ % ]",
-            data: [soil_humidity],
-            backgroundColor: ['rgba(255, 203, 5, 0.25)'],
-            borderColor: ['rgba(255, 203, 5, 1)'],
-            borderWidth: 1,
-            pointBorderColor: 'rgba(255, 203, 5, 1)',
-            pointBackgroundColor: 'rgba(255, 203, 5, 0.25)',
-            fill: true,
-            pointRadius: 4
-        }]
+var i = 0;
+var air_tempeature = [];
+var air_humidity = [];
+var light_intensity = [];
+var soil_humidity = [];
+var date_time = [];
+var moist_hum_values = [0, 0]
+num = 5;
+
+const labels = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+];
+
+const moistureLabels = [
+  'test1',
+  'test2',
+]
+
+const humidityLabels = [
+  'test1',
+  'test2',
+]
+
+/****************  DATA  *****************/
+const moistureData = {
+  labels: ['Soil moisture [%]'],
+  datasets: [{
+    label: 'Soil moisture [%]',
+    data: [soil_humidity],
+    backgroundColor: [
+        'rgba(239, 183, 0, 1)',
+        'rgba(38, 38, 38, 1)'
+    ],
+    borderColor: [
+        'rgba(228,174,0,1)',
+        'rgba(228,174,0,1)',
+    ],
+    borderWidth: 1,
+  }]
+};
+
+const temperatureData = {
+  labels: [date_time],
+  datasets: [{
+    label: 'Temperature [°C]',
+    backgroundColor: 'rgba(239, 183, 0, 0.1)',
+    borderColor: 'rgba(220, 170, 0, 0.8)',
+    pointBackgroundColor: 'rgba(239, 183, 0, 1)',
+    data: [air_tempeature],
+    fill: true,
+    pointRadius: 4
+  }]
+};
+
+const humidityData = {
+  labels: ['Air humidity [%]'],
+  datasets: [{
+    label: 'Air humidity [%]',
+    data: [air_humidity],
+    backgroundColor: [
+      'rgba(239, 183, 0, 1)',
+      'rgba(38, 38, 38, 1)'
+    ],
+    borderColor: [
+      'rgba(228,174,0,1)',
+      'rgba(228,174,0,1)',
+    ],
+    borderWidth: 1
+  }]
+};
+
+const lightData = {
+  labels: [date_time],
+  datasets: [{
+    label: 'Light intensety [mW/cm2]',
+    backgroundColor: 'rgba(239, 183, 0, 0.1)',
+    borderColor: 'rgba(220, 170, 0, 0.8)',
+    pointBackgroundColor: 'rgba(239, 183, 0, 1)',
+    data: [light_intensity],
+    fill: true,
+    pointRadius: 4
+  }]
+};
+
+
+/***************  OPTIONS  *****************/
+
+const moistureOptions= {
+  color: '#EFB700',
+  rotation: 86 * Math.PI
+}
+
+
+const temperatureOptions = {
+  color: '#EFB700',
+  animation: {duration: 50, easing: 'linear'},
+  scales: {
+    x: {
+      display: false
+    },
+    y: {
+      min: 0,
+      max: 50
     }
+  }
+}
 
-    var canvas_air_temp = document.getElementById('airtempchart');
-    var data_air_temp = {
-        labels: [date_time],
-        datasets: [{
-            label: "Temperatura vazduha [ °C ]",
-            data: [air_tempeature],
-            backgroundColor: ['rgba(255, 203, 5, 0.25)'],
-            borderColor: ['rgba(255, 203, 5, 1)'],
-            borderWidth: 1,
-            pointBorderColor: 'rgba(255, 203, 5, 1)',
-            pointBackgroundColor: 'rgba(255, 203, 5, 0.25)',
-            fill: true,
-            pointRadius: 4
 
-        }]
+const humidityOptions= {
+  color: '#EFB700',
+  rotation: 86 * Math.PI
+  /*circumference: 1 * Math.PI*/
+}
+
+const lightOptions = {
+  color: '#EFB700',
+  animation: {duration: 50, easing: 'linear'},
+  scales: {
+    x: {
+      display: false
+    },
+    y: {
+      min: 0,
+      max: 480
     }
+  }
+}
 
-    var canvas_air_humid = document.getElementById('airhumiditychart');
-    var data_air_humid = {
-        labels: [date_time],
-        datasets: [{
-            label: "Vlažnost vazduha[ % ]",
-            data: [air_humidity],
-            backgroundColor: ['rgba(255, 203, 5, 0.25)'],
-            borderColor: ['rgba(255, 203, 5, 1)'],
-            borderWidth: 1,
-            pointBorderColor: 'rgba(255, 203, 5, 1)',
-            pointBackgroundColor: 'rgba(255, 203, 5, 0.25)',
-            fill: true,
-            pointRadius: 4
-        }]
-    }
+/****************  CONFIG  *****************/
+const moistureConfig = {
+  type: 'doughnut',
+  data: moistureData,
+  options: moistureOptions
+};
 
-    var canvas_light = document.getElementById('lightchart');
-    var data_light = {
-        labels: [date_time],
-        datasets: [{
-            label: "Intenzitet svetlosti[ Lx ]",
-            data: [light_intensity],
-            backgroundColor: ['rgba(255, 203, 5, 0.25)'],
-            borderColor: ['rgba(255, 203, 5, 1)'],
-            borderWidth: 1,
-            pointBorderColor: 'rgba(255, 203, 5, 1)',
-            pointBackgroundColor: 'rgba(255, 203, 5, 0.25)',
-            fill: true,
-            pointRadius: 4
-        }]
-    }
+const temperatureConfig = {
+  type: 'line',
+  data: temperatureData,
+  options: temperatureOptions
+};
+
+const humidityConfig = {
+  type: 'doughnut',
+  data: humidityData,
+  options: humidityOptions
+};
+
+const lightConfig = {
+  type: 'line',
+  data: lightData,
+  options: lightOptions
+};
+
+/****************  RENDER  *****************/
+var moistureChart = new Chart(
+  document.getElementById('moistureChart'),
+  moistureConfig
+);
+
+var temperatureChart = new Chart(
+  document.getElementById('temperatureChart'),
+  temperatureConfig
+);
+
+var humidityChart = new Chart(
+  document.getElementById('humidityChart'),
+  humidityConfig
+);
+
+var lightChart = new Chart(
+  document.getElementById('lightChart'),
+  lightConfig
+);
+/******************************/
 
 
-    var option_soil_humid = {
-        hover: () => {},
-	    showLines: true,
-        responsive: true,
-        animation: {duration: 50, easing: 'linear'},
-         scales: {
-            yAxes: [{
-                display: true,
-                gridLines: {color: 'rgba(rgba(255, 203, 5, 0.15)'},
-                ticks: {beginAtZero: true, min: 0, max: 100, stepSize: 5}
-            }],
-            xAxes:[{
-                display: true,
-                gridLines: {color: 'rgba(255, 203, 5, 0.15'},
-				ticks: {maxTicksLimit: 10, fontSize: 8}
-            }]
-        }             
-    };
+function adddata(){
+  var getData = $.get('/data1');
+  getData.done(function(results){
+      i = 19
+      for(var a = 0; a < 20; a++){
+          date_time[i] = results[a][1];
 
-    var option_air_temp = {
-        hover: () => {},
-	    showLines: true,
-        responsive: true,
-        animation: {duration: 50, easing: 'linear'},
-         scales: {
-            yAxes: [{
-                display: true,
-                gridLines: {color: 'rgba(rgba(255, 203, 5, 0.15)'},
-                ticks: {beginAtZero: true, min: 0, max: 50, stepSize: 5}
-            }],
-            xAxes:[{
-                display: true,
-                gridLines: {color: 'rgba(255, 203, 5, 0.15'},
-				ticks: {maxTicksLimit: 10, fontSize: 8}
-            }]
-        }             
-    };
+          moistureChart.data.datasets[0].data[0] = results[0][2];
+          moistureChart.data.datasets[0].data[1] = 100 - results[0][2];
+          moist_hum_values[0] = results[0][2]
 
-    var option_air_humid = {
-        hover: () => {},
-	    showLines: true,
-        responsive: true,
-        animation: {duration: 50, easing: 'linear'},
-         scales: {
-            yAxes: [{
-                display: true,
-                gridLines: {color: 'rgba(rgba(255, 203, 5, 0.15)'},
-                ticks: {beginAtZero: true, min: 0, max: 100, stepSize: 5}
-            }],
-            xAxes:[{
-                display: true,
-                gridLines: {color: 'rgba(255, 203, 5, 0.15'},
-				ticks: {maxTicksLimit: 10, fontSize: 8}
-            }]
-        }             
-    };
+          air_tempeature[i] = results[a][4];
+          temperatureChart.data.datasets[0].data[a] = air_tempeature[a];
+          temperatureChart.data.labels[i] = date_time[i];
 
-    var option_light = {
-        hover: () => {},
-	    showLines: true,
-        responsive: true,
-        animation: {duration: 50, easing: 'linear'},
-         scales: {
-            yAxes: [{
-                display: true,
-                gridLines: {color: 'rgba(rgba(255, 203, 5, 0.15)'},
-                ticks: {beginAtZero: true, min: 0, max: 480, stepSize: 5}
-            }],
-            xAxes:[{
-                display: true,
-                gridLines: {color: 'rgba(255, 203, 5, 0.15'},
-				ticks: {maxTicksLimit: 10, fontSize: 8}
-            }]
-        }             
-    };
+          humidityChart.data.datasets[0].data[0] = results[0][3];
+          humidityChart.data.datasets[0].data[1] = 100 - results[0][3];
+          moist_hum_values[1] = results[0][3]
 
-    var line_chart_soil_humid = Chart.Line(canvas_soil_humid,{data:data_soil_humid,options:option_soil_humid});
-    var line_chart_air_temp = Chart.Line(canvas_air_temp,{data:data_air_temp,options:option_air_temp});
-    var line_chart_air_humid = Chart.Line(canvas_air_humid,{data:data_air_humid,options:option_air_humid});
-    var line_chart_light = Chart.Line(canvas_light,{data:data_light,options:option_light});
-    
-    
-    function adddata(){
-        var getData = $.get('/data1');
-        getData.done(function(results){
-            i = 19
-            for(var a = 0; a < 20; a++){
-				date_time[i] = results[a][1];
-				
-				soil_humidity[i] = results[a][2];
-                line_chart_soil_humid.data.datasets[0].data[a] = soil_humidity[a];
-                line_chart_soil_humid.data.labels[i] = date_time[i];
+          light_intensity[i] = results[a][5];
+          lightChart.data.datasets[0].data[a] = light_intensity[a];
+          lightChart.data.labels[i] = date_time[i];
 
-				air_tempeature[i] = results[a][4];
-                line_chart_air_temp.data.datasets[0].data[a] = air_tempeature[a];
-                line_chart_air_temp.data.labels[i] = date_time[i];
+          i--;
+      }
 
-				air_humidity[i] = results[a][3];
-                line_chart_air_humid.data.datasets[0].data[a] = air_humidity[a];
-                line_chart_air_humid.data.labels[i] = date_time[i];
+      document.getElementById('chart1Text').innerText = String(moist_hum_values[0]) + "%";
+      document.getElementById('chart2Text').innerText = String(moist_hum_values[1]) + "%";
+      
+      moistureChart.update();
+      temperatureChart.update();
+      humidityChart.update();
+      lightChart.update();
+  });
+}
 
-				light_intensity[i] = results[a][5];
-                line_chart_light.data.datasets[0].data[a] = light_intensity[a];
-                line_chart_light.data.labels[i] = date_time[i];
-
-                i--;
-            }
-
-            line_chart_soil_humid.update();
-            line_chart_air_temp.update();
-            line_chart_air_humid.update();
-            line_chart_light.update();
-        });
-    }
-    
-    window.setInterval(function(){
-        adddata();
-    }, 200);
-    
+window.setInterval(function(){
+  adddata();
+}, 200);

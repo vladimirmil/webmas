@@ -60,22 +60,5 @@ def getdata():
     return jsonify(l)
 
 
-@app.route('/this-route', methods=['GET', 'POST'])
-def thisRoute():
-    global information
-    information = request.data
-    return information
-
-
-@app.route("/data2")
-def getdata2():
-    info = str(information)
-    info = info.replace("'", "")
-    info = info.replace("b", "")
-    i = "_id=\"" + info + "\""
-    l = getSqlData(table, i)
-    return jsonify(l)
-
-
 if __name__ == "__main__":
     app.run(debug=True)
