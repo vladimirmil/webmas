@@ -2,40 +2,44 @@ Chart.defaults.color = "#EFB700";
 Chart.defaults.borderColor = "#513E01";
 
 
-var i = 0;
-var air_tempeature = [];
-var air_humidity = [];
-var light_intensity = [];
-var soil_humidity = [];
-var date_time = [];
-var moist_hum_values = [0, 0]
-num = 5;
+const TEMPERATURE_MAX_VALUE = 50;
+const TEMPERATURE_MIN_VALUE = 0;
+const LIGHT_MAX_VALUE = 480;
+const LIGHT_MIN_VALUE = 0;
 
-const labels = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-];
+let i = 0;
+let air_tempeature = [];
+let air_humidity = [];
+let light_intensity = [];
+let soil_humidity = [];
+let date_time = [];
+let moist_hum_values = [0, 0];
 
-const moistureLabels = [
-  'test1',
-  'test2',
-]
-
-const humidityLabels = [
-  'test1',
-  'test2',
-]
 
 /****************  DATA  *****************/
-const moistureData = {
-  labels: ['Soil moisture [%]'],
-  datasets: [{
-    label: 'Soil moisture [%]',
-    data: [soil_humidity],
+function setLineChartData(txt, d, d_date){
+  let chart_data = {
+    labels: [d_date],
+    datasets: [{
+      label: txt,
+      backgroundColor: 'rgba(239, 183, 0, 0.1)',
+      borderColor: 'rgba(220, 170, 0, 0.8)',
+      pointBackgroundColor: 'rgba(239, 183, 0, 1)',
+      data: [d],
+      fill: true,
+      pointRadius: 4
+    }]
+  };
+  return chart_data;
+}
+
+
+function setDoughnutChartData(txt, d){
+  let chart_data = {
+    labels: [txt],
+    datasets: [{
+    label: txt,
+    data: [d],
     backgroundColor: [
         'rgba(239, 183, 0, 1)',
         'rgba(38, 38, 38, 1)'
@@ -46,137 +50,84 @@ const moistureData = {
     ],
     borderWidth: 1,
   }]
-};
-
-const temperatureData = {
-  labels: [date_time],
-  datasets: [{
-    label: 'Temperature [°C]',
-    backgroundColor: 'rgba(239, 183, 0, 0.1)',
-    borderColor: 'rgba(220, 170, 0, 0.8)',
-    pointBackgroundColor: 'rgba(239, 183, 0, 1)',
-    data: [air_tempeature],
-    fill: true,
-    pointRadius: 4
-  }]
-};
-
-const humidityData = {
-  labels: ['Air humidity [%]'],
-  datasets: [{
-    label: 'Air humidity [%]',
-    data: [air_humidity],
-    backgroundColor: [
-      'rgba(239, 183, 0, 1)',
-      'rgba(38, 38, 38, 1)'
-    ],
-    borderColor: [
-      'rgba(228,174,0,1)',
-      'rgba(228,174,0,1)',
-    ],
-    borderWidth: 1
-  }]
-};
-
-const lightData = {
-  labels: [date_time],
-  datasets: [{
-    label: 'Light intensety [mW/cm2]',
-    backgroundColor: 'rgba(239, 183, 0, 0.1)',
-    borderColor: 'rgba(220, 170, 0, 0.8)',
-    pointBackgroundColor: 'rgba(239, 183, 0, 1)',
-    data: [light_intensity],
-    fill: true,
-    pointRadius: 4
-  }]
-};
+  };
+  return chart_data;
+}
 
 
 /***************  OPTIONS  *****************/
-
-const moistureOptions= {
-  color: '#EFB700',
-  rotation: 86 * Math.PI
+function setDoughnutChartOptions(){
+  let options= {
+    color: '#EFB700',
+    rotation: 86 * Math.PI
+  };
+  return options;
 }
 
-
-const temperatureOptions = {
-  color: '#EFB700',
-  animation: {duration: 50, easing: 'linear'},
-  scales: {
-    x: {
-      display: false
-    },
-    y: {
-      min: 0,
-      max: 50
+function setLineChartOptions(min_y, max_y){
+  let options = {
+    color: '#EFB700',
+    animation: {duration: 50, easing: 'linear'},
+    scales: {
+      x: {
+        display: false
+      },
+      y: {
+        min: min_y,
+        max: max_y
+      }
     }
-  }
+  };
+  return options;
 }
 
-
-const humidityOptions= {
-  color: '#EFB700',
-  rotation: 86 * Math.PI
-  /*circumference: 1 * Math.PI*/
-}
-
-const lightOptions = {
-  color: '#EFB700',
-  animation: {duration: 50, easing: 'linear'},
-  scales: {
-    x: {
-      display: false
-    },
-    y: {
-      min: 0,
-      max: 480
-    }
-  }
-}
 
 /****************  CONFIG  *****************/
-const moistureConfig = {
-  type: 'doughnut',
-  data: moistureData,
-  options: moistureOptions
-};
+function setChartConfig(t, d, o){
+  let config = {
+    type: t,
+    data: d,
+    options: o
+  };
+  return config;
+}
 
-const temperatureConfig = {
-  type: 'line',
-  data: temperatureData,
-  options: temperatureOptions
-};
 
-const humidityConfig = {
-  type: 'doughnut',
-  data: humidityData,
-  options: humidityOptions
-};
+const temperatureData = setLineChartData('Temperature [°C]', air_tempeature, date_time)
+const lightData = setLineChartData('Light intensety [mW/cm2]', light_intensity, date_time)
+const moistureData = setDoughnutChartData('Soil moisture [%]', soil_humidity)
+const humidityData = setDoughnutChartData('Air humidity [%]', air_humidity)
 
-const lightConfig = {
-  type: 'line',
-  data: lightData,
-  options: lightOptions
-};
+const temperatureOptions = setLineChartOptions(TEMPERATURE_MIN_VALUE, TEMPERATURE_MAX_VALUE)
+const lightOptions = setLineChartOptions(LIGHT_MIN_VALUE, LIGHT_MAX_VALUE)
+const moistureOptions = setDoughnutChartOptions()
+const humidityOptions= setDoughnutChartOptions()
+
+
+const temperatureConfig = setChartConfig('line', temperatureData, temperatureOptions)
+const lightConfig = setChartConfig('line', lightData, lightOptions)
+const humidityConfig = setChartConfig('doughnut', humidityData, humidityOptions)
+const moistureConfig = setChartConfig('doughnut', moistureData, moistureOptions)
+
+
 
 /****************  RENDER  *****************/
-var moistureChart = new Chart(
+const moistureChart = new Chart(
   document.getElementById('moistureChart'),
   moistureConfig
 );
 
-var temperatureChart = new Chart(
+const temperatureChart = new Chart(
   document.getElementById('temperatureChart'),
   temperatureConfig
 );
 
-var humidityChart = new Chart(
+const humidityChart = new Chart(
   document.getElementById('humidityChart'),
   humidityConfig
 );
 
-var lightChart = new Chart(
+const lightChart = new Chart(
   document.getElementById('lightChart'),
   lightConfig
 );
@@ -184,7 +135,7 @@ var lightChart = new Chart(
 
 
 function adddata(){
-  var getData = $.get('/data1');
+  let getData = $.get('/data1');
   getData.done(function(results){
       i = 19
       for(var a = 0; a < 20; a++){
@@ -209,9 +160,9 @@ function adddata(){
           i--;
       }
 
-      document.getElementById('chart1Text').innerText = String(moist_hum_values[0]) + "%";
-      document.getElementById('chart2Text').innerText = String(moist_hum_values[1]) + "%";
-      
+      document.getElementById('moisture-value').innerText = String(moist_hum_values[0]) + "%";
+      document.getElementById('humidity-value').innerText = String(moist_hum_values[1]) + "%";
+
       moistureChart.update();
       temperatureChart.update();
       humidityChart.update();

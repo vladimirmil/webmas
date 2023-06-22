@@ -1,0 +1,66 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    background-color: #212121;
+    color: #fff;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    line-height: 1;
+    font-weight: 400;
+    overflow-x: hidden;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+}
+
+.container{
+    max-width: 120rem;
+    padding: 4.8rem;
+    margin: 2.4rem auto;
+    background-color: #222;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, 
+                rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    border-radius: 23px;
+    z-index: -2;
+}
+
+.chart{
+    position: relative;
+    color: #efb700;
+    z-index: 2;
+}
+
+.grid{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid--2-cols{
+    grid-template-columns: 0.3fr 0.7fr;
+}
+
+.column-gap-3{
+    row-gap: 1rem;
+    column-gap: 6.2rem; 
+}
+
+.chart-doughnut{
+    padding-bottom: 3rem;
+}
+
+.chart-doughnut-value{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.4rem;
+    z-index: -1;
+}
+

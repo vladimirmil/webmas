@@ -1,0 +1,90 @@
+/* 1rem = 1em = 16px */
+
+
+/*** width < 1280 ***/
+@media (max-width: 80em){
+    .chart{
+        width: 99%;
+    }
+}
+
+/*** width < 976 ***/
+@media (max-width: 61em){
+    html{
+        /* 8px / 16px = 56.25% */
+        font-size: 50%;
+    }
+}
+
+
+/*** width < 752 ***/
+@media (max-width: 47em){
+    html{
+        /* 6px / 16px = 37.5% */
+        font-size: 37.5%;
+    }
+
+    .chart-doughnut-value{
+        transform: translate(-50%, -30%);
+    }
+}
+
+
+/*** width < 608 ***/
+@media (max-width: 38em){
+    html{
+        /* 8px / 16px = 50% */
+        font-size: 50%;
+    }
+
+    .grid--2-cols{
+        grid-template-columns: 1fr;
+    }
+
+    .column-gap-3{
+        row-gap: 4.2rem;
+    }
+
+    .chart-doughnut{
+        padding-left: 9.6rem;
+        padding-right: 9.6rem;
+    }
+
+    .container{
+        padding: 1.8rem;
+    }
+}
+
+
+/*** width < 448 ***/
+@media (max-width: 28em){
+    html{
+        /* 7px / 16px = 43.75% */
+        font-size: 43.75%;
+    }
+
+    .chart-doughnut{
+        padding-left: 10rem;
+        padding-right: 10rem;
+    }
+
+    
+
+    .column-gap-3{
+        row-gap: 1.8rem;
+    }
+
+}
+
+
+/*** width < 336 ***/
+@media (max-width: 21em){
+    html{
+        /* 6px / 16px = 37.5% */
+        font-size: 37.5%;
+    }
+
+    .column-gap-3{
+        row-gap: 1rem;
+    }
+}
